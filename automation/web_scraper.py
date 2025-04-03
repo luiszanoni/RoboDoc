@@ -30,7 +30,8 @@ driver.get("https://www.magazineluiza.com.br/")
 print(driver.title)
 
 search_bar = driver.find_element(By.CSS_SELECTOR, '[data-testid="input-search"]')
-search_bar.send_keys("Galaxy zflip 6")
+produto = "Galaxy ZFlip 6"
+search_bar.send_keys(produto)
 
 submit_button = driver.find_element(By.CSS_SELECTOR, '[data-testid="search-submit"]')
 
@@ -42,7 +43,7 @@ primeiro_objeto = driver.find_element(By.XPATH, '//ul[@data-testid="list"]/li[1]
 valor = primeiro_objeto.find_element(By.XPATH, '//p[@data-testid="price-value"]')
 
 
-produto = "Galaxy ZFlip 6"
+
 data = datetime.now()
 query.execute(f"INSERT INTO precos (produto, preco, data) VALUES (\'{produto}\', \'{valor.text}\', \'{data}\')")
 connection.commit()
