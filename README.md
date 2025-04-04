@@ -28,31 +28,38 @@ Projeto de automação criado com foco em tarefas repetitivas, como atividades d
 ## ▶️ Como Executar
 
 1. **Clone o repositório**:
+
    ```bash
    git clone https://github.com/lgzanoni/RoboDoc.git
    cd RoboDoc
    ```
+
 2. **Instale as dependências**:
+
+   ```bash
    pip install -r requirements.txt
+   ```
 
 3. **Execute o menu principal**:
+   ```bash
    python main.py
+   ```
 
 ## 📦 Requisitos
 
-    Além das bibliotecas Python, você precisa:
+Além das bibliotecas Python, você precisa:
 
-    Tesseract OCR instalado no sistema:
+Tesseract OCR instalado no sistema:
 
-        Windows: Baixe em https://github.com/tesseract-ocr/tesseract/wiki
+Windows: Baixe em https://github.com/tesseract-ocr/tesseract/wiki
 
-        Linux: sudo apt install tesseract-ocr
+Linux: sudo apt install tesseract-ocr
 
-    Google Chrome instalado (para o Selenium funcionar corretamente).
+Google Chrome instalado (para o Selenium funcionar corretamente).
 
-    ChromeDriver compatível com sua versão do Chrome.
+ChromeDriver compatível com sua versão do Chrome.
 
-        Ajuste o caminho no código se necessário.
+Ajuste o caminho no código se necessário.
 
 ## ✍️ Autor
 
