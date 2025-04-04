@@ -1,4 +1,4 @@
-# PyAutoGUI Pywinauto
+# PyAutoGUI
 import pyautogui
 import sys
 import os

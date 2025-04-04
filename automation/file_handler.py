@@ -1,4 +1,4 @@
-# Pandas OpenPyXl
+# Pandas
 import pandas
 import sys
 import os
