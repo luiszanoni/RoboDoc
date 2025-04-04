@@ -1,139 +1,58 @@
 # PyAutoGUI Pywinauto
 import pyautogui
-import time
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from logs.logger import logger
 
-pyautogui.PAUSE = 1
+class DesktopAutomation:
+    def __init__(self):
+        self.BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
+        self.IMAGE_PATH = os.path.join(self.BASE_DIR, "images")
+        self.IMAGE_PATHS = [os.path.join(self.IMAGE_PATH, "textsize.png"), os.path.join(self.IMAGE_PATH, "textsize36.png")]
+        self.localizacaosize = None
+        self.largura, self.altura = pyautogui.size()
 
-pyautogui.FAILSAFE = True
+        self.x, self.y = 300, 400
+        self.espaco_entre_letras = 80 
 
-largura, altura = pyautogui.size()
-pyautogui.hotkey("win", "r")
-pyautogui.write("mspaint")
-pyautogui.press("enter")
+    def automatizacaopaint(self):
+        print("###################################################################")
+        print("INICIANDO PROCESSO AUTOMATIZADO DE NAVEGACAO DE SISTEMA OPERACIONAL")
+        print("###################################################################")
+        try:
+            pyautogui.PAUSE = 1
+            pyautogui.FAILSAFE = True
+            
+            pyautogui.hotkey("win", "r")
+            pyautogui.write("mspaint")
+            pyautogui.press("enter")
+            1
+            localizacaotext = pyautogui.locateOnScreen(os.path.join(self.IMAGE_PATH, "texticon.png"), confidence=0.8)
+            pyautogui.click(localizacaotext)
+            
+            localizacaobold = pyautogui.locateOnScreen(os.path.join(self.IMAGE_PATH, "textbold.png"), confidence=0.8)
 
-x, y = 300, 400
-espaco_entre_letras = 80 
+            center_x, center_y = pyautogui.center(localizacaobold)
+            adjusted_x = center_x - 100
+            
+            pyautogui.click(adjusted_x, center_y)
 
+            pyautogui.typewrite('36')
+            
+            pyautogui.click(self.x,self.y)
+            pyautogui.dragTo(self.x+1000, self.y+400)
+            
+            pyautogui.typewrite('Automatizacao feita por Luis Gustavo Zanoni')
+            pyautogui.press('enter')
+            pyautogui.typewrite('Linkedin: https://www.linkedin.com/in/luiszanoni/')
+            pyautogui.press('enter')
+            pyautogui.typewrite('Github: https://github.com/luiszanoni')
 
-def desenhar_natalia_te_amo():
-    global x, y
-    
-    # "N"
-    pyautogui.moveTo(x, y)
-    pyautogui.dragTo(x, y + 100, duration=0.5)
-    pyautogui.moveTo(x, y)
-    pyautogui.dragTo(x + 50, y + 100, duration=0.5)
-    pyautogui.moveTo(x + 50, y)
-    pyautogui.dragTo(x + 50, y + 100, duration=0.5)
-    x += espaco_entre_letras  
+            logger.info("desktop_automation executado com sucesso!")
+        except Exception as e:
+            logger.exception("Falha ao executar o desktop_automation")
 
-
-    # "A"
-    pyautogui.moveTo(x, y + 100)
-    pyautogui.dragTo(x + 25, y, duration=0.5)
-    pyautogui.dragTo(x + 50, y + 100, duration=0.5)
-    pyautogui.moveTo(x + 15, y + 50)
-    pyautogui.dragTo(x + 35, y + 50, duration=0.3)
-    x += espaco_entre_letras  
-
-
-    # "T"
-    pyautogui.moveTo(x, y)
-    pyautogui.dragTo(x + 50, y, duration=0.5)
-    pyautogui.moveTo(x + 25, y)
-    pyautogui.dragTo(x + 25, y + 100, duration=0.5)
-    x += espaco_entre_letras  
-
-
-    # "A"
-    pyautogui.moveTo(x, y + 100)
-    pyautogui.dragTo(x + 25, y, duration=0.5)  
-    pyautogui.dragTo(x + 50, y + 100, duration=0.5)  
-    pyautogui.moveTo(x + 15, y + 50)
-    pyautogui.dragTo(x + 35, y + 50, duration=0.3)  
-    x += espaco_entre_letras  
-
-
-    # "L"
-    pyautogui.moveTo(x, y)
-    pyautogui.dragTo(x, y + 100, duration=0.5)  
-    pyautogui.dragTo(x + 50, y + 100, duration=0.5)  
-    x += espaco_entre_letras  
-
-
-    # "I"
-    pyautogui.moveTo(x + 25, y)
-    pyautogui.dragTo(x + 25, y + 100, duration=0.5)  
-    x += espaco_entre_letras  
-
-
-    # "A"
-    pyautogui.moveTo(x, y + 100)
-    pyautogui.dragTo(x + 25, y, duration=0.5)  
-    pyautogui.dragTo(x + 50, y + 100, duration=0.5)  
-    pyautogui.moveTo(x + 15, y + 50)
-    pyautogui.dragTo(x + 35, y + 50, duration=0.3)  
-    x += espaco_entre_letras + 20  
-
-
-    # "T"
-    pyautogui.moveTo(x, y)
-    pyautogui.dragTo(x + 50, y, duration=0.5)  
-    pyautogui.moveTo(x + 25, y)
-    pyautogui.dragTo(x + 25, y + 100, duration=0.5)  
-    x += espaco_entre_letras  
-
-
-    # "E"
-    pyautogui.moveTo(x, y)
-    pyautogui.dragTo(x, y + 100, duration=0.5)  
-    pyautogui.dragTo(x + 50, y + 100, duration=0.5)  
-    pyautogui.moveTo(x, y + 50)
-    pyautogui.dragTo(x + 40, y + 50, duration=0.3)  
-    pyautogui.moveTo(x, y)
-    pyautogui.dragTo(x + 50, y, duration=0.5)  
-    x += espaco_entre_letras + 20  
-
-
-    # "A"
-    pyautogui.moveTo(x, y + 100)
-    pyautogui.dragTo(x + 25, y, duration=0.5)  
-    pyautogui.dragTo(x + 50, y + 100, duration=0.5)  
-    pyautogui.moveTo(x + 15, y + 50)
-    pyautogui.dragTo(x + 35, y + 50, duration=0.3)  
-    x += espaco_entre_letras  
-
-
-    # "M"
-    pyautogui.moveTo(x, y + 100)
-    pyautogui.dragTo(x, y, duration=0.5)  
-    pyautogui.dragTo(x + 25, y + 50, duration=0.5)  
-    pyautogui.dragTo(x + 50, y, duration=0.5)  
-    pyautogui.dragTo(x + 50, y + 100, duration=0.5)  
-    x += espaco_entre_letras  
-
-
-    # "O"
-    pyautogui.moveTo(x, y)
-    pyautogui.dragTo(x, y + 100, duration=0.5)  
-    pyautogui.dragTo(x + 50, y + 100, duration=0.5)  
-    pyautogui.dragTo(x + 50, y, duration=0.5)  
-    pyautogui.dragTo(x, y, duration=0.5)  
-
-def automatizacaopaint():
-    localizacaotext = pyautogui.locateOnScreen('texticon.png')
-    pyautogui.click(localizacaotext)
-    localizacaosize = pyautogui.locateOnScreen('textsize.png')
-    pyautogui.click(localizacaosize)
-    pyautogui.typewrite('36')
-    
-    pyautogui.click(x,y)
-    pyautogui.dragTo(x+1000, y+400)
-    
-    pyautogui.typewrite('Automatizacao feita por Luis Gustavo Zanoni')
-    pyautogui.press('enter')
-    pyautogui.typewrite('Linkedin: https://www.linkedin.com/in/luiszanoni/')
-    pyautogui.press('enter')
-    pyautogui.typewrite('Github: https://github.com/luiszanoni')
-
-automatizacaopaint()
+if __name__ == "__main__":
+    automacao = DesktopAutomation()
+    automacao.automatizacaopaint()

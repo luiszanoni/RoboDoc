@@ -1,33 +1,64 @@
 # Pandas OpenPyXl
 import pandas
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from logs.logger import logger
 
-df = pandas.read_json('data.json')
+class FileHandler:
+    def __init__(self):
+        self.df = pandas.read_json('data.json')
 
-print(df)
+    def verificaDuplicados(self):
+        logger.info("Iniciando processo de verificar duplicados")
+        
+        if (self.df.duplicated().any()):
+            print("\nO arquivo contém registros duplicados!\n")
+        else:
+            print("\nNenhum registro duplicado encontrado.\n")
+            
+        logger.info("Processo finalizado")
 
-def verificaDuplicados():
-    if (df.duplicated().any()):
-        print("O arquivo contém registros duplicados!")
-    else:
-        print("Nenhum registro duplicado encontrado.")
+    def indentificaDuplicados(self):
+        logger.info("Iniciando processo de identificar duplicados")
+        
+        duplicados = self.df[self.df.duplicated()]
+        
+        if not duplicados.empty:
+            print("\nRegistros duplicados encontrados:")
+            print(duplicados)
+        else:
+            print("\nNenhum registro duplicado encontrado.")
+        
+        logger.info("Processo finalizado")
 
-def indentificaDuplicados():
-    duplicados = df[df.duplicated()]
-    
-    if not duplicados.empty:
-        print("\nRegistros duplicados encontrados:")
-        print(duplicados)
-    else:
-        print("\nNenhum registro duplicado encontrado.")
+    def excluiDuplicados(self):
+        logger.info("Iniciando processo para excluir registros duplicados")
+        
+        if (self.df.duplicated().any()):
+            self.df = self.df.drop_duplicates()
+            self.df.to_json('data.json', orient='records', indent=4)
+            print("\nRegistros duplicados excluidos\n")
+        else:
+            print("\nNenhum registro duplicado encontrado.\n")
 
-def converteParaXls():
-    df.to_excel('dados.xlsx', index=False)
+        logger.info("Processo finalizado")
 
-def converteParaCsv():
-    df.to_csv('dados.csv', index=False)
+    def converteParaXlsx(self):
+        logger.info("Iniciando de conversao de arquivo json -> xlsx")
+        self.df.to_excel('dados.xlsx', index=False)
+        logger.info("Processo finalizado")
 
-def converteParaXml():
-    df.to_xml('dados.xml', index=False)
+    def converteParaCsv(self):
+        logger.info("Iniciando de conversao de arquivo json -> csv")
+        self.df.to_csv('dados.csv', index=False)
+        logger.info("Processo finalizado")
 
-verificaDuplicados()
-indentificaDuplicados() 
+    def converteParaXml(self):
+        logger.info("Iniciando de conversao de arquivo json -> xml")
+        self.df.to_xml('dados.xml', index=False)
+        logger.info("Processo finalizado")
+
+if __name__ == "__main__":
+    automacao = FileHandler()
+    automacao.indentificaDuplicados()
