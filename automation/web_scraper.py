@@ -58,6 +58,7 @@ def procuraPreco():
 
     print(valor.text.replace("ou ", "") + " ", data)
     driver.quit()
+    logger.info("Processo de consulta de preco automatico finalizado!")
 
 if __name__ == "__main__":
     procuraPreco()  
